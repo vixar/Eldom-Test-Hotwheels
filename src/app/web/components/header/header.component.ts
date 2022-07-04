@@ -9,7 +9,7 @@ import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
 })
 export class HeaderComponent implements OnInit, OnChanges {
 
-  @Input() listCars!: Hotwheels;
+  @Input() listCars!: Hotwheels
 
   item: any [] = [];
 
