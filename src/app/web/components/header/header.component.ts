@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { HotwheelsService } from '../../../core/services/hotwheels.service';
 import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
 
@@ -9,7 +9,7 @@ import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
 })
 export class HeaderComponent implements OnInit, OnChanges {
 
-  @Input() listCars!: Hotwheels
+  @Input() listCars!: Hotwheels;
 
   item: any [] = [];
 
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.item.push(this.listCars)
+    this.item.push(this.listCars);
   }
 
   ngOnInit() {

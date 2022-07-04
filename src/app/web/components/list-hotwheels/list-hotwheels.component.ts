@@ -40,14 +40,16 @@ export class ListHotwheelsComponent implements OnInit {
 
   // Agrega un nuevo objeto a la lista de favoritos
   addFavourite(obj: Hotwheels): void {
-    if (!this.listCars.find((x) => x.id === obj.id)) {
-      // this.listCars.push(obj);
 
-      this.hotwheelsService.setCurrentHotwheel(obj);
+    const value = !this.listCars.some((x) => x.id === obj.id)
+
+    if (value === true) {
+      this.listCars.push(obj);
+     
+      this.hotwheelsService.setCurrentHotwheel(obj);  
 
       this.hotwheelsService.AddFav(obj).subscribe((resp) => {
         if (resp) {
-          this.GetAllCars();
           this.alertAdd();
         } else {
           console.log(
@@ -57,8 +59,10 @@ export class ListHotwheelsComponent implements OnInit {
           );
         }
       });
-    } else if (this.listCars.filter((x) => x.id === obj.id)) {
+
+    } else if(value === false) {
       //Recorre la lista e elimina el car selecionado
+
       this.listCars.forEach(function (x, index, object) {
         if (x.id === obj.id) {
           object.splice(index, 1);
@@ -67,6 +71,7 @@ export class ListHotwheelsComponent implements OnInit {
 
       this.hotwheelsService.removeFav(obj.id).subscribe((resp: Hotwheels) => {
         if (resp) {
+          this.hotwheelsService.setCurrentHotwheelRemove(obj)
           this.alertRemoved();
         } else {
           console.log('%c⧭', 'color: #9c66cc', 'Error al eliminar hotwheels');

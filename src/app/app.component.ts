@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { HotwheelsService } from './core/services/hotwheels.service';
 import { Hotwheels } from './web/interfaces/hotwheels.interfaces';
 
@@ -10,7 +10,6 @@ import { Hotwheels } from './web/interfaces/hotwheels.interfaces';
 export class AppComponent {
   title = 'HotWheels';
   
-  @Output() AddFav = new EventEmitter();
   AddFavourite!: Hotwheels;
 
   constructor(
@@ -21,5 +20,10 @@ export class AppComponent {
     this.hotwheelsService.currentValue.subscribe((resp: Hotwheels) => {
       this.AddFavourite = resp;
     })
+
+    this.hotwheelsService.currentValue2.subscribe((resp: Hotwheels) => {
+      console.log('%c⧭', 'color: #f200e2', resp);
+    })
+  
   }
 }

@@ -29,6 +29,7 @@ export class FavouriteHotwheelsComponent implements OnInit {
 
   // Agrega un nuevo objeto a la lista de favoritos
   removedFavourite(obj: Hotwheels): void {
+    
     this.listCars.forEach(function (x, index, object) {
       if (x.id === obj.id) {
         object.splice(index, 1);

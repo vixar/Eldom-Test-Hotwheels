@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class HotwheelsService {
 
-    url = environment.server + '/Cars'
+    urlCars = environment.server + '/Cars'
 
     urlFav = environment.server + '/Fav'
     
@@ -20,7 +20,7 @@ export class HotwheelsService {
 
     private value2: BehaviorSubject<Hotwheels> = new BehaviorSubject({} as Hotwheels);
 
-    public currentValue2: Observable<Hotwheels> = this.value.asObservable();
+    public currentValue2: Observable<Hotwheels> = this.value2.asObservable();
 
     constructor(
     private http: HttpClient
@@ -29,25 +29,30 @@ export class HotwheelsService {
 
     //Metodo para obtener todos los carros
     GetAllCars(): Observable<Hotwheels[]> {
-        return this.http.get<Hotwheels[]>(this.url)
+        return this.http.get<Hotwheels[]>(this.urlCars)
     }
 
-    CreateCar(data: Hotwheels): Observable<Hotwheels> {
-        return this.http.post<Hotwheels>(this.url, data)
+    //Metodo para crear un nuevo item
+    CreateCar(data: any): Observable<Hotwheels> {
+        return this.http.post<Hotwheels>(this.urlCars, data)
     }
 
-    EditCar(id: string,data: Hotwheels): Observable<Hotwheels> {
-        return this.http.post<Hotwheels>(`${this.urlFav}/${id}`, data)
+    //Metodo para editar un carro
+    EditCar(id: string, data: Hotwheels): Observable<Hotwheels> {
+        return this.http.post<Hotwheels>(`${this.urlCars}/${id}`, data)
     }
 
-    AddFav(data: Hotwheels): Observable<Hotwheels>{
-        return this.http.post<Hotwheels>(this.urlFav, data)
-    }
-
+    //Obtener todos los favoritos
     GetFav(): Observable<Hotwheels[]> {
         return this.http.get<Hotwheels[]>(this.urlFav)
     }
 
+    //Agregar a favoritos
+    AddFav(data: Hotwheels): Observable<Hotwheels>{
+        return this.http.post<Hotwheels>(this.urlFav, data)
+    }
+
+    //Eliminar de favoritos
     removeFav(id: string): Observable<Hotwheels> {
         return this.http.delete<Hotwheels>(`${this.urlFav}/${id}`)
     }
