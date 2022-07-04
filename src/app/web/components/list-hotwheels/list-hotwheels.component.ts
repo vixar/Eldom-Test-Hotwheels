@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { HotwheelsService } from '../../../core/services/hotwheels.service';
 import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-hotwheels',
@@ -50,7 +50,7 @@ export class ListHotwheelsComponent implements OnInit {
 
       this.hotwheelsService.AddFav(obj).subscribe((resp) => {
         if (resp) {
-          this.alertAdd();
+          // this.alertAdd();
         } else {
           console.log(
             '%c⧭',
@@ -72,7 +72,7 @@ export class ListHotwheelsComponent implements OnInit {
       this.hotwheelsService.removeFav(obj.id).subscribe((resp: Hotwheels) => {
         if (resp) {
           this.hotwheelsService.setCurrentHotwheelRemove(obj)
-          this.alertRemoved();
+          // this.alertRemoved();
         } else {
           console.log('%c⧭', 'color: #9c66cc', 'Error al eliminar hotwheels');
         }
@@ -80,31 +80,31 @@ export class ListHotwheelsComponent implements OnInit {
     }
   }
 
-  alertAdd(): void {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'bottom-end',
-      timer: 2000,
-    });
-    Toast.fire({
-      text: 'Agregado a favoritos',
-      icon: 'success',
-      iconColor: 'red',
-      showConfirmButton: false,
-    });
-  }
+  // alertAdd(): void {
+  //   const Toast = Swal.mixin({
+  //     toast: true,
+  //     position: 'bottom-end',
+  //     timer: 2000,
+  //   });
+  //   Toast.fire({
+  //     text: 'Agregado a favoritos',
+  //     icon: 'success',
+  //     iconColor: 'red',
+  //     showConfirmButton: false,
+  //   });
+  // }
 
-  alertRemoved(): void {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'bottom-end',
-      timer: 2000,
-    });
-    Toast.fire({
-      text: 'Eliminado de favoritos',
-      icon: 'error',
-      iconColor: 'red',
-      showConfirmButton: false,
-    });
-  }
+  // alertRemoved(): void {
+  //   const Toast = Swal.mixin({
+  //     toast: true,
+  //     position: 'bottom-end',
+  //     timer: 2000,
+  //   });
+  //   Toast.fire({
+  //     text: 'Eliminado de favoritos',
+  //     icon: 'error',
+  //     iconColor: 'red',
+  //     showConfirmButton: false,
+  //   });
+  // }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { HotwheelsService } from '../../../core/services/hotwheels.service';
 import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
 
@@ -48,7 +48,6 @@ export class CreateHotwheelsComponent implements OnInit {
         nombre: "Carro 4"
       }
     ]
-    console.log('%c⧭', 'color: #408059', this.tipo);
   }
 
   CreateHotwheel(): void {
@@ -57,7 +56,7 @@ export class CreateHotwheelsComponent implements OnInit {
 
       this.hotwheelsService.CreateCar(this.hotwheelsForm.value).subscribe((resp: Hotwheels) => {
         if(resp){
-          this.alertAdd();
+          // this.alertAdd();
         }
       })
     } else {
@@ -66,18 +65,18 @@ export class CreateHotwheelsComponent implements OnInit {
   }
 
 
-  alertAdd(): void {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'bottom-end',
-      timer: 2000,
-    });
-    Toast.fire({
-      text: 'Agregado nuevo Hotwheel',
-      icon: 'success',
-      iconColor: 'red',
-      showConfirmButton: false,
-    });
-  }
+  // alertAdd(): void {
+  //   const Toast = Swal.mixin({
+  //     toast: true,
+  //     position: 'bottom-end',
+  //     timer: 2000,
+  //   });
+  //   Toast.fire({
+  //     text: 'Agregado nuevo Hotwheel',
+  //     icon: 'success',
+  //     iconColor: 'red',
+  //     showConfirmButton: false,
+  //   });
+  // }
 
 }

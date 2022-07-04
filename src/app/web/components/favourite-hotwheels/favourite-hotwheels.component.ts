@@ -3,7 +3,7 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { HotwheelsService } from '../../../core/services/hotwheels.service';
 import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
 
@@ -38,24 +38,24 @@ export class FavouriteHotwheelsComponent implements OnInit {
 
     this.hotwheelsService.removeFav(obj.id).subscribe((resp: Hotwheels) => {
       if (resp) {
-        this.alertRemove();
+        // this.alertRemove();
       } else {
         console.log('%c⧭', 'color: #9c66cc', 'Error al eliminar hotwheels');
       }
     });
   }
 
-  alertRemove(): void {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'bottom-end',
-      timer: 3000,
-    });
-    Toast.fire({
-      text: 'Eliminado de la lista de favoritos',
-      icon: 'error',
-      iconColor: 'red',
-      showConfirmButton: false,
-    });
-  }
+  // alertRemove(): void {
+  //   const Toast = Swal.mixin({
+  //     toast: true,
+  //     position: 'bottom-end',
+  //     timer: 3000,
+  //   });
+  //   Toast.fire({
+  //     text: 'Eliminado de la lista de favoritos',
+  //     icon: 'error',
+  //     iconColor: 'red',
+  //     showConfirmButton: false,
+  //   });
+  // }
 }
