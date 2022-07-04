@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { HotwheelsService } from '../../../core/services/hotwheels.service';
 import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
 
@@ -19,7 +20,7 @@ export class CreateHotwheelsComponent implements OnInit {
 
    hotwheelsForm = this.formbuilder.group({
     nombre:      ['',Validators.required],
-    Description: ['', Validators.required, Validators.maxLength(50)],
+    Description: ['', Validators.required],
     picture:     ['', Validators.required],
     tipo:        this.formbuilder.group({
       id: [''],
@@ -55,11 +56,28 @@ export class CreateHotwheelsComponent implements OnInit {
     if(this.hotwheelsForm.valid){
 
       this.hotwheelsService.CreateCar(this.hotwheelsForm.value).subscribe((resp: Hotwheels) => {
-        console.log('%c⧭', 'color: #ff0000', resp);
+        if(resp){
+          this.alertAdd();
+        }
       })
     } else {
       console.log('%c⧭', 'color: #00e600', 'Error al crear hotwheels');
     }
+  }
+
+
+  alertAdd(): void {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      timer: 2000,
+    });
+    Toast.fire({
+      text: 'Agregado nuevo Hotwheel',
+      icon: 'success',
+      iconColor: 'red',
+      showConfirmButton: false,
+    });
   }
 
 }

@@ -1,23 +1,20 @@
 <form [formGroup]="hotwheelsForm" (ngSubmit)="CreateHotwheel()">
 
-    <div class="container ml-1 mt-4 mb-4 row col-6">
+    <div class="container border ml-1 mt-4 mb-4 row col-4">
 
-        <span for="label" class="mb-2 mt-2">Agregue el Nombre </span>
+        <span for="label" class="mb-2 mt-2">Agregue el nombre </span>
         <input class="form-control col-4" for="label" type="text" placeholder="Nombre" formControlName="nombre">
         
-        <span [hidden]="hotwheelsForm.untouched || hotwheelsForm.valid">
-            Error
-        </span>
-
-
         <span for="label" class="mb-2 mt-2">Agregue la descripción</span>
         <textarea class="col-6 form-control" maxlength="50" for="label" type="text" placeholder="Descripcion" formControlName="Description"></textarea>
 
-        <span for="label" class="mb-2 mt-2">Agregue una Imagen</span>
+        <span for="label" class="mb-2 mt-2">Agregue una imagen</span>
         <input class="col-6 form-control" for="label" type="url" placeholder="URL" formControlName="picture">
 
         <span for="label" class="mb-2 mt-2">Tipo de HotWheels</span>
- 
+        <select title="Seleccionar" class="form-control col-6" formControlName="" name="" id="">
+            <option *ngFor="let item of tipo" value="">{{item.nombre}}</option>
+        </select>
 
     </div>
 
