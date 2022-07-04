@@ -20,6 +20,10 @@ const routes: Routes = [
     path: "hotwheels/create",
     component: CreateHotwheelsComponent,
     title: "Crear HotWheel"
+  },
+  {
+    path: "**",
+    redirectTo: "hotwheels"
   }
 ];
 
