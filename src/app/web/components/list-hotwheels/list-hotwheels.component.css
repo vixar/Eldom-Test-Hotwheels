@@ -1,7 +1,5 @@
-.item:hover {
-    background-color: #2CC5F4;
-    active: true;
+.item:active {
+    background-color: #AFDAFF;
     box-shadow: 0px 15px 20px rgba(44, 197, 244, 0.4);
     color: #fff;
-    transform: translateY(-4px);
 }
