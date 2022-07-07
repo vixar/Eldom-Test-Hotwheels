@@ -1,0 +1,9 @@
+{
+
+  "/api/:cars/": "/:cars",
+  "/api/:cars/:id/": "/:cars/:id",
+  
+  "/api/:fav/": "/:fav",
+  "/api/:fav/:id/": "/:fav/:id"
+  
+}
