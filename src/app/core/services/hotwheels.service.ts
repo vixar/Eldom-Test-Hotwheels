@@ -8,19 +8,21 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class HotwheelsService {
 
+    ListCars: string  = '../assets/json/HotWheels.json'
+
     urlCars = environment.server + '/Cars'
 
     urlFav = environment.server + '/Fav'
     
     //Emite un nuevo valor y me va permitor suscribirme
-    private value: BehaviorSubject<Hotwheels> = new BehaviorSubject({} as Hotwheels);
+    private value: BehaviorSubject<number> = new BehaviorSubject({} as number);
 
-    public currentValue: Observable<Hotwheels> = this.value.asObservable();
+    public currentValue: Observable<number> = this.value.asObservable();
 
 
-    private value2: BehaviorSubject<Hotwheels> = new BehaviorSubject({} as Hotwheels);
+    private value2: BehaviorSubject<number> = new BehaviorSubject({} as number);
 
-    public currentValue2: Observable<Hotwheels> = this.value2.asObservable();
+    public currentValue2: Observable<number> = this.value2.asObservable();
 
     constructor(
     private http: HttpClient
@@ -29,7 +31,7 @@ export class HotwheelsService {
 
     //Metodo para obtener todos los carros
     GetAllCars(): Observable<Hotwheels[]> {
-        return this.http.get<Hotwheels[]>(this.urlCars)
+        return this.http.get<Hotwheels[]>(this.ListCars)
     }
 
     //Metodo para crear un nuevo item
@@ -58,11 +60,11 @@ export class HotwheelsService {
     }
 
     //Le pasamos el nuevo valor
-    setCurrentHotwheel(currentValue2: Hotwheels): void {
-        this.value.next(currentValue2)
+    setCurrentHotwheel(currentValue: number): void {
+        this.value.next(currentValue)
     }
 
-    setCurrentHotwheelRemove(currentValue2: Hotwheels): void {
+    setCurrentHotwheelRemove(currentValue2: number): void {
         this.value2.next(currentValue2)
     }
 

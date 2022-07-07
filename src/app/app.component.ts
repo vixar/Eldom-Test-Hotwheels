@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { HotwheelsService } from './core/services/hotwheels.service';
 import { Hotwheels } from './web/interfaces/hotwheels.interfaces';
 
@@ -10,20 +10,19 @@ import { Hotwheels } from './web/interfaces/hotwheels.interfaces';
 export class AppComponent {
   title = 'HotWheels';
   
-  AddFavourite!: Hotwheels;
+  Count!: number;
 
   constructor(
     private hotwheelsService: HotwheelsService
   ) { }
-  
+
   ngOnInit() {
-    this.hotwheelsService.currentValue.subscribe((resp: Hotwheels) => {
-      this.AddFavourite = resp;
+    this.hotwheelsService.currentValue.subscribe((resp: number) => {
+      this.Count = resp;
     })
 
-    this.hotwheelsService.currentValue2.subscribe((resp: Hotwheels) => {
-      console.log('%c⧭', 'color: #f200e2', resp);
+    this.hotwheelsService.currentValue2.subscribe((resp: number) => {
+      this.Count = resp;
     })
-  
   }
 }

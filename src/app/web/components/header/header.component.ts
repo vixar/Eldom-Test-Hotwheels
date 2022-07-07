@@ -7,24 +7,12 @@ import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
-  @Input() listCars!: Hotwheels
+  @Input() Count!: number;
 
-  item: any [] = [];
+  constructor() {}
 
-  constructor(
-    private hotwheelsService: HotwheelsService
-  ) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.item.push(this.listCars);
-  }
-
-  ngOnInit() {
-    this.hotwheelsService.GetFav().subscribe((resp => {
-      this.item = resp;
-    }))
-  }
+  ngOnInit() {}
 
 }

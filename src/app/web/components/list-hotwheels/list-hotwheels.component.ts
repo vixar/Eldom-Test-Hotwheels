@@ -12,7 +12,9 @@ import { Hotwheels } from '../../interfaces/hotwheels.interfaces';
   styleUrls: ['./list-hotwheels.component.css'],
 })
 export class ListHotwheelsComponent implements OnInit {
-  listCars: Hotwheels[] = [];
+  ListCars: Hotwheels[] = [];
+
+  count: number = 0;
 
   cars: Hotwheels[] = [];
 
@@ -20,63 +22,66 @@ export class ListHotwheelsComponent implements OnInit {
 
   ngOnInit() {
     this.GetAllCars();
-    this.GetFavCars();
+    // this.GetFavCars();
   }
 
   //Obtengo todos los hotwheels
   GetAllCars(): void {
     this.hotwheelsService.GetAllCars().subscribe((resp: Hotwheels[]) => {
       this.cars = resp;
-      console.log('%c⧭', 'color: #731d6d', resp, 'Todos los hotwheels');
     });
   }
 
   GetFavCars(): void {
     this.hotwheelsService.GetFav().subscribe((resp: Hotwheels[]) => {
-      this.listCars = resp;
-      console.log('%c⧭', 'color: #731d6d', resp, 'HotWheels Favoritos');
+      this.ListCars = resp;
     });
   }
 
   // Agrega un nuevo objeto a la lista de favoritos
   addFavourite(obj: Hotwheels): void {
 
-    const value = !this.listCars.some((x) => x.id === obj.id)
+    const Exists = !this.ListCars.some((x) => x.id === obj.id)
 
-    if (value === true) {
-      this.listCars.push(obj);
+    if (Exists === true) {
+      this.ListCars.push(obj);
+
+      this.count = this.count + 1;
      
-      this.hotwheelsService.setCurrentHotwheel(obj);  
+      this.hotwheelsService.setCurrentHotwheel(this.count);  
 
-      this.hotwheelsService.AddFav(obj).subscribe((resp) => {
-        if (resp) {
-          // this.alertAdd();
-        } else {
-          console.log(
-            '%c⧭',
-            'color: #86bf60',
-            'Error, No se agrego a favorito'
-          );
-        }
-      });
+      // this.hotwheelsService.AddFav(obj).subscribe((resp) => {
+      //   if (resp) {
+      //     // this.alertAdd();
+      //   } else {
+      //     console.log(
+      //       '%c⧭',
+      //       'color: #86bf60',
+      //       'Error, No se agrego a favorito'
+      //     );
+      //   }
+      // });
 
-    } else if(value === false) {
+    } else if(Exists === false) {
       //Recorre la lista e elimina el car selecionado
+      
+      this.ListCars.forEach(function (x, index, object) {
+          if (x.id === obj.id) {
+            object.splice(index, 1);
+          }
+        });
+        
+      this.count = this.count - 1;
 
-      this.listCars.forEach(function (x, index, object) {
-        if (x.id === obj.id) {
-          object.splice(index, 1);
-        }
-      });
+      this.hotwheelsService.setCurrentHotwheelRemove(this.count)
 
-      this.hotwheelsService.removeFav(obj.id).subscribe((resp: Hotwheels) => {
-        if (resp) {
-          this.hotwheelsService.setCurrentHotwheelRemove(obj)
-          // this.alertRemoved();
-        } else {
-          console.log('%c⧭', 'color: #9c66cc', 'Error al eliminar hotwheels');
-        }
-      });
+      // this.hotwheelsService.removeFav(obj.id).subscribe((resp: Hotwheels) => {
+      //   if (resp) {
+      //     // this.alertRemoved();
+      //   } else {
+      //     console.log('%c⧭', 'color: #9c66cc', 'Error al eliminar hotwheels');
+      //   }
+      // });
     }
   }
 

@@ -18,7 +18,7 @@ export class FavouriteHotwheelsComponent implements OnInit {
   constructor(private hotwheelsService: HotwheelsService) {}
 
   ngOnInit() {
-    this.GetFavCars();
+    // this.GetFavCars();
   }
 
   GetFavCars(): void {
